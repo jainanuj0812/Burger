@@ -20,7 +20,6 @@ class BurgerBuilder extends Component {
     };
 
     componentDidMount () {
-        console.log(this.props);
         this.props.onInitIngredient();
         /*axios.get( '/ingredients.json' )
             .then( response => {
@@ -75,7 +74,13 @@ class BurgerBuilder extends Component {
     };*/
 
     purchaseHandler = () => {
-        this.setState( { purchasing: true } );
+        if (this.props.isAuthenticated) {
+            this.setState( { purchasing: true } );
+        } else {
+            this.props.onSetAuthRedirectPath('/checkout');
+            this.props.history.push('/auth');
+        }
+
     };
 
     purchaseCancelHandler = () => {
@@ -108,6 +113,7 @@ class BurgerBuilder extends Component {
                         ingredientAdded={this.props.onIngredientAdded}
                         ingredientRemoved={this.props.onIngredientRemoved}
                         disabled={disabledInfo}
+                        isAuth={this.props.isAuthenticated}
                         purchasable={this.updatePurchaseState(this.props.ing)}
                         ordered={this.purchaseHandler}
                         price={this.props.totalPrice} />
@@ -135,7 +141,8 @@ const mapStateToProps = state => {
     return {
         ing: state.burgerBuilder.ingredients,
         totalPrice: state.burgerBuilder.totalPrice,
-        error: state.burgerBuilder.error
+        error: state.burgerBuilder.error,
+        isAuthenticated: state.auth.token !== null
     }
 };
 
@@ -144,7 +151,8 @@ const mapDispatchToProps = dispatch => {
         onIngredientAdded: (ingName) => dispatch(burgerBuilderActions.addIngredient(ingName)),
         onIngredientRemoved: (ingName) => dispatch(burgerBuilderActions.removeIngredient(ingName)),
         onInitIngredient: () => dispatch(burgerBuilderActions.initIngredient()),
-        onInitPurchase: () => dispatch(burgerBuilderActions.purchaseInit())
+        onInitPurchase: () => dispatch(burgerBuilderActions.purchaseInit()),
+        onSetAuthRedirectPath: (path) => dispatch(burgerBuilderActions.setAuthRedirectPath(path))
     }
 };
 

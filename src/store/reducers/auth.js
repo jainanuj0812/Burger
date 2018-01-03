@@ -1,11 +1,12 @@
-import { updateObject } from '../utility';
+import { updateObject } from '../../shared/utility';
 import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
     token: null,
     userId: null,
     error: null,
-    loading: false
+    loading: false,
+    authRedirectPath: '/'
 };
 
 export const authStart = (state, action) => {
@@ -36,22 +37,24 @@ export const authExpired = (state, action) => {
         token: null,
         userId: null
     });
-}
+};
+
+export const setAuthRedirectPath = (state, action) => {
+    return updateObject(state, {authRedirectPath: action.path});
+};
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.AUTH_START:
             return authStart(state, action);
-            break;
         case actionTypes.AUTH_SUCCESS:
             return authSuccess(state, action);
-            break;
         case actionTypes.AUTH_FAILED:
             return authFailed(state, action);
-            break;
         case actionTypes.AUTH_EXPIRED:
             return authExpired(state, action);
-            break;
+        case actionTypes.SET_AUTH_REDIRECT_PATH:
+            return setAuthRedirectPath(state, action);
         default:
             return state;
     }
