@@ -7,4 +7,4 @@ script:
 install:
  — npm install -g firebase-tools
 after_success:
- — firebase deploy — project react-my-burger-3f8c2 — token AIzaSyCDxcPI23T0KVaW2zqGzKXh_mQkO-HC_08.
+ — firebase deploy — project react-my-burger-3f8c2 — token 1/XOEZOdgUttYv_w4T3VqReUjBiAu1csUWrZGQCxHaPdU
