@@ -3,7 +3,6 @@ node_js: lts/*
 before_install:
   - npm install -g firebase-tools
   - npm install
-  —  firebase deploy  — project react-my-burger-3f8c2 — token 1/yIdLE_Xq_BOau-tfMuiZHVGs7PSw3KeOqO79fToQlnQ
 cache:
   directories:
     - "node_modules"
