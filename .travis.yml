@@ -8,5 +8,3 @@ cache:
     - "node_modules"
 install: true
 script: echo "script"
-after_success:
-   — firebase deploy  — project react-my-burger-3f8c2 — token $FIREBASE_TOKEN.
