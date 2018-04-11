@@ -1,18 +1,21 @@
 language: node_js
 node_js: lts/*
-before_install:
-  - npm install
-  - npm run build
 cache:
   directories:
     - "node_modules"
-install: true
-script: echo "script"
+install:
+  - npm install
+script:
+  - npm run build
 deploy:
   provider: firebase
   skip_cleanup: true
   token:
     secure: $FIREBASE_TOKEN
+  provider: azure_web_apps
+  username: $AZURE_USERNAME
+  password: $AZURE_PASSWORD
+  site: https://react-burger.azurewebsites.net
 notifications:
   slack:
     on_success: always
