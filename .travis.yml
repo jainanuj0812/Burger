@@ -13,3 +13,6 @@ deploy:
   skip_cleanup: true
   token:
     secure: $FIREBASE_TOKEN
+notifications:
+  slack:
+    on_success: always
