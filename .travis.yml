@@ -10,14 +10,14 @@ script:
 before_deploy:
   - cd build
 deploy:
-  provider: firebase
-  skip_cleanup: true
-  token:
-    secure: $FIREBASE_TOKEN
-  provider: azure_web_apps
-  username: $AZURE_USERNAME
-  password: $AZURE_PASSWORD
-  site: https://react-burger.azurewebsites.net
+  - provider: firebase
+    skip_cleanup: true
+    token:
+      secure: $FIREBASE_TOKEN
+  - provider: azure_web_apps
+    username: $AZURE_USERNAME
+    password: $AZURE_PASSWORD
+    site: https://react-burger.azurewebsites.net
 notifications:
   slack:
     on_success: always
