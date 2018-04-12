@@ -9,6 +9,7 @@ script:
   - npm run build
 before_deploy:
   - cd build
+  - mv firebase.json build/
 deploy:
   - provider: firebase
     skip_cleanup: true
